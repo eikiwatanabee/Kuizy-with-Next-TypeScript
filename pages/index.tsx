@@ -4,11 +4,13 @@ import { bigQuestions } from './data'
 const App = () => {
   return (
     <Container maxWidth="sm">
-        {bigQuestions.map(( bigQuestion,index ) => {
-          return (
-            <Quiz key={index} bigQuestion={bigQuestion} />
-          )
-        })}
+      {bigQuestions.map((bigQuestion, index) => {
+        return (
+          <Quiz key={index} bigQuestion={bigQuestion} />
+          // TODO keyにindex使わない方がいいです。
+          // bigQuestion.idにしましょう。
+        )
+      })}
     </Container>
   )
 }

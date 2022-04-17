@@ -1,4 +1,6 @@
-export const bigQuestions=[
+// TODO data.tsの場所、srcの下がいい。
+// TODO data.tsでbigQuestionの型定義しちゃった方がいいかも
+export const bigQuestions = [
     {
         id: 1,
         choices: ["たかなわ", "こうわ", "たかわ"],
