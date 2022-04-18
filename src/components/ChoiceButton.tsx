@@ -1,13 +1,15 @@
 import type { NextPage } from 'next'
 import { Button, Box } from '@mui/material'
 import { FC } from 'react'
+import { ButtonStyle } from './Quiz'
 
 type ChoiceButtonProps = {
     choices: string[]
     judgeAnswer: any
-    buttonStyle: any
+    buttonStyle: ButtonStyle[]
 }
 const ChoiceButton: FC<ChoiceButtonProps> = ({ choices, judgeAnswer, buttonStyle }) => {
+    console.log(judgeAnswer)
     return (
         <>
             {

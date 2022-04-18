@@ -3,14 +3,19 @@ import Image from 'next/image'
 import { Box, Typography } from '@mui/material'
 import { useState, FC } from 'react'
 import ChoiceButton from './ChoiceButton'
-type BigQuestionProps = {
+
+export type ButtonStyle ={
+    color: "inherit" | "primary" | "secondary" | "success" | "error" | "info" | "warning" | undefined
+    variant: "text" | "outlined" | "contained" | undefined
+}
+type BigQuestion = {
     id: number;
     choices: string[];
     answerIndex: number;
     image: string;
 }
 type QuizProps = {
-    bigQuestion: BigQuestionProps
+    bigQuestion: BigQuestion
 }
 const Quiz: FC<QuizProps> = ({ bigQuestion }) => {
     // 答えのモーダルを出すための定義
@@ -20,12 +25,12 @@ const Quiz: FC<QuizProps> = ({ bigQuestion }) => {
     const id = bigQuestion.id;
     const answerNum: number = bigQuestion.answerIndex;
     const choices = bigQuestion.choices;
-    const defaultButtonStyle = [
+    const defaultButtonStyle: ButtonStyle[] = [
         { variant: 'outlined', color: 'inherit' },
         { variant: 'outlined', color: 'inherit' },
         { variant: 'outlined', color: 'inherit' },
     ];
-    const [buttonStyle, setButtonStyle] = useState(defaultButtonStyle);
+    const [buttonStyle, setButtonStyle] = useState<ButtonStyle[]>(defaultButtonStyle);
     // ボタンを押した時の処理
     const judgeAnswer = (choiceNum: number) => {
         // ボタンを一度押したら処理を抜ける
@@ -51,8 +56,8 @@ const Quiz: FC<QuizProps> = ({ bigQuestion }) => {
                 <Image
                     src={bigQuestion.image}
                     alt="Picture of the author"
-                    width={500}
-                    height={500}
+                    width={400}
+                    height={400}
                 />
             </Box>
             <ChoiceButton
