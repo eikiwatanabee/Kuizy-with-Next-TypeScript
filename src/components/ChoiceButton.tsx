@@ -1,22 +1,21 @@
-import type { NextPage } from 'next'
 import { Button, Box } from '@mui/material'
 import { FC } from 'react'
 import { ButtonStyle } from './Quiz'
 
 type ChoiceButtonProps = {
     choices: string[]
-    judgeAnswer: any
+    judgeAnswer: (index: number) => void
     buttonStyle: ButtonStyle[]
 }
-const ChoiceButton: FC<ChoiceButtonProps> = ({ choices, judgeAnswer, buttonStyle }) => {
-    console.log(judgeAnswer)
+
+const ChoiceButtons: FC<ChoiceButtonProps> = ({ choices, judgeAnswer, buttonStyle }) => {
     return (
         <>
             {
                 choices.map((choice: string, index: number) => {
                     return (
                         <>
-                            <Box>
+                            <Box key={index}>
                                 <Button
                                     onClick={() => judgeAnswer(index)}
                                     color={buttonStyle[index].color}
@@ -40,4 +39,4 @@ const ChoiceButton: FC<ChoiceButtonProps> = ({ choices, judgeAnswer, buttonStyle
     )
 }
 
-export default ChoiceButton;
+export default ChoiceButtons;

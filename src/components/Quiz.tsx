@@ -1,10 +1,9 @@
-import type { NextPage } from 'next'
 import Image from 'next/image'
 import { Box, Typography } from '@mui/material'
 import { useState, FC } from 'react'
-import ChoiceButton from './ChoiceButton'
+import ChoiceButtons from './ChoiceButton'
 
-export type ButtonStyle ={
+export type ButtonStyle = {
     color: "inherit" | "primary" | "secondary" | "success" | "error" | "info" | "warning" | undefined
     variant: "text" | "outlined" | "contained" | undefined
 }
@@ -19,11 +18,11 @@ type QuizProps = {
 }
 const Quiz: FC<QuizProps> = ({ bigQuestion }) => {
     // 答えのモーダルを出すための定義
-    const [answerIsShown, setAnswerIsShown] = useState(false);
+    const [answerIsShown, setAnswerIsShown] = useState<boolean>(false); // TODO useStateの型定義
     // 押したボタンが正解かを判別するための定義
-    const [answerIsRight, setAnswerIsRight] = useState(false);
-    const id = bigQuestion.id;
-    const answerNum: number = bigQuestion.answerIndex;
+    const [answerIsRight, setAnswerIsRight] = useState<boolean>(false); // TODO useStateの型定義
+    const questionId = bigQuestion.id; 
+    const answerIndex = bigQuestion.answerIndex; 
     const choices = bigQuestion.choices;
     const defaultButtonStyle: ButtonStyle[] = [
         { variant: 'outlined', color: 'inherit' },
@@ -32,25 +31,24 @@ const Quiz: FC<QuizProps> = ({ bigQuestion }) => {
     ];
     const [buttonStyle, setButtonStyle] = useState<ButtonStyle[]>(defaultButtonStyle);
     // ボタンを押した時の処理
-    const judgeAnswer = (choiceNum: number) => {
+    const judgeAnswer = (choiceIndex: number) => {
         // ボタンを一度押したら処理を抜ける
-        if(answerIsShown)return;
+        if (answerIsShown) return;
         setAnswerIsShown(true);
-        if (choiceNum == answerNum) {
-            buttonStyle[answerNum] = { variant: 'contained', color: 'primary' }
+        if (choiceIndex == answerIndex) {
+            buttonStyle[answerIndex] = { variant: 'contained', color: 'primary' }
             setButtonStyle(buttonStyle)
             setAnswerIsRight(true);
         }
         else {
-            buttonStyle[choiceNum] = { variant: 'contained', color: 'error' }
-            buttonStyle[answerNum] = { variant: 'contained', color: 'primary' }
+            buttonStyle[choiceIndex] = { variant: 'contained', color: 'error' }
+            buttonStyle[answerIndex] = { variant: 'contained', color: 'primary' }
         }
-        console.log(judgeAnswer)
     }
     return (
         <Box>
             <Typography fontWeight="bold" sx={{ mb: 5 }}>
-                {id}. この地名はなんて読む？
+                {questionId}. この地名はなんて読む？
             </Typography>
             <Box display="flex" sx={{ justifyContent: "center" }}>
                 <Image
@@ -60,7 +58,7 @@ const Quiz: FC<QuizProps> = ({ bigQuestion }) => {
                     height={400}
                 />
             </Box>
-            <ChoiceButton
+            <ChoiceButtons
                 choices={choices}
                 judgeAnswer={judgeAnswer}
                 buttonStyle={buttonStyle}
@@ -75,10 +73,10 @@ const Quiz: FC<QuizProps> = ({ bigQuestion }) => {
                             width: 'fit-content',
                             mb: 2,
                         }}>
-                        {!answerIsRight && <span>不</span>}正解
+                        {!answerIsRight && "不"}正解 {/* TODO span要らないので、"不"にしましょう。 */}
                     </Typography>
                     <Typography>
-                        正解は「{choices[answerNum]}」です！
+                        正解は「{choices[answerIndex]}」です！
                     </Typography>
                 </Box>
             }
