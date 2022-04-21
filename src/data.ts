@@ -1,5 +1,11 @@
 // TODO data.tsの場所、srcの下がいい。
 // TODO data.tsでbigQuestionの型定義しちゃった方がいいかも
+export type BigQuestion = {
+    id: number;
+    choices: string[];
+    answerIndex: number;
+    image: string;
+}
 export const bigQuestions = [
     {
         id: 1,

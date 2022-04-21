@@ -2,16 +2,11 @@ import Image from 'next/image'
 import { Box, Typography } from '@mui/material'
 import { useState, FC } from 'react'
 import ChoiceButtons from './ChoiceButton'
+import { BigQuestion } from '../data'
 
 export type ButtonStyle = {
     color: "inherit" | "primary" | "secondary" | "success" | "error" | "info" | "warning" | undefined
     variant: "text" | "outlined" | "contained" | undefined
-}
-type BigQuestion = {
-    id: number;
-    choices: string[];
-    answerIndex: number;
-    image: string;
 }
 type QuizProps = {
     bigQuestion: BigQuestion

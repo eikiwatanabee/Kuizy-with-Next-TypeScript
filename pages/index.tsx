@@ -1,6 +1,6 @@
 import Quiz from "../src/components/Quiz"
 import { Container } from "@mui/material"
-import { bigQuestions } from './data'
+import { bigQuestions } from '../src/data'
 const App = () => {
   return (
     <Container maxWidth="sm">
